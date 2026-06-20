@@ -8,8 +8,11 @@ import userRoutes from "./routes/user";
 
 const app = express();
 
-// Enable CORS for local frontend during development
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// Allows the local dev frontend plus the deployed frontend (set via env var)
+const allowedOrigins = ["http://localhost:5173", process.env.CLIENT_ORIGIN].filter(
+  (origin): origin is string => Boolean(origin)
+);
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 // Allows Express to parse incoming JSON request bodies (req.body)
 app.use(express.json());

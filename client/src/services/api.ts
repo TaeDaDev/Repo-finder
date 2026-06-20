@@ -1,5 +1,5 @@
 // All backend requests go through this base URL
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/';
 
 export function register (email: string, password: string) {
   return fetch(`${BASE_URL}auth/register`, {
